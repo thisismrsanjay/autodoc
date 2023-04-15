@@ -1,0 +1,111 @@
+{
+    "usage": "The code builds a cleaned and merged dataset of COVID-19 cases in India.",
+    "functions": [
+        {
+            "name": "fetch_raw_data_from_api",
+            "use": "Fetches raw data and death/recovery files from an API."
+        },
+        {
+            "name": "fetch_raw_data",
+            "use": "Reads all raw data and death/recovery files locally."
+        },
+        {
+            "name": "fix_rawdata1and2",
+            "use": "Fixes formatting issues in the first two versions of the raw data files."
+        },
+        {
+            "name": "merge_alldata",
+            "use": "Merges all versions of the raw data files and fixes formatting issues."
+        },
+        {
+            "name": "fix_age",
+            "use": "Converts age in months to a fraction of a year."
+        },
+        {
+            "name": "fix_gender",
+            "use": "Fixes any invalid entries in the gender column."
+        },
+        {
+            "name": "compare_with_gospel",
+            "use": "Compares the merged dataset with a 'gospel' dataset."
+        }
+    ]
+}
+{
+"usage": "This code converts raw district-wise COVID-19 data to a state-wise format, and writes the output to two separate JSON files in the tmp directory.",
+"functions": [
+{
+"name": "reduce",
+"use": "Transforms raw district-wise COVID-19 data to state-wise format"
+},
+{
+"name": "Object.keys",
+"use": "Extracts state names from the transformed data"
+},
+{
+"name": "Array.map",
+"use": "Maps over the transformed data to extract district-wise data for each state"
+},
+{
+"name": "JSON.stringify",
+"use": "Converts JavaScript objects to JSON format for outputting to files"
+},
+{
+"name": "fs.writeFileSync",
+"use": "Writes transformed data to two separate JSON files in the tmp directory"
+}
+]
+}
+{
+"usage": "This code generates updates for COVID-19 cases in India and sends the updates via a telegram message.",
+"functions": [
+{
+"name": "initRelStates",
+"use": "Initializes the related states object."
+},
+{
+"name": "editMessage",
+"use": "Edits the Telegram message that sends the update to the user."
+},
+{
+"name": "fillSpace",
+"use": "Adds empty spaces to a string to make it a certain width."
+}
+]
+}
+{
+"usage":"This code exports a set of functions to fetch data from a Google Sheet and save it as a JSON file.",
+"functions":[
+{
+"name":"fetchData",
+"use":"Fetches data from a Google Sheet and returns a merged object of all tabs data.",
+},
+{
+"name":"writeData",
+"use":"Takes data and a file name, and saves the data to a JSON file.",
+},
+{
+"name":"sortObjByKey",
+"use":"Takes an object, sorts its keys alphabetically, and returns the sorted object.",
+},
+{
+"name":"task",
+"use":"The main function that fetches data from a Google Sheet, writes it to a JSON file, and logs the operation."
+}
+]
+}
+{
+"usage":"This code parses raw data of COVID-19 cases in India and creates JSON files containing relevant statistics.",
+"functions":[
+{ "name":"parse_state_metadata",
+"use":"Parses state metadata such as state codes, names and populations from raw data."},
+{ "name":"parse_district_list",
+"use":"Parses geographical district data from raw data."},
+{ "name":"parse_district_metadata",
+"use":"Parses district metadata such as district names and populations from raw data."},
+{ "name":"parse",
+"use":"Parses the raw data of COVID-19 cases and generates relevant statistics for each date, state and district."},
+{ "name":"inc",
+"use":"Helper function to increment the value of a dictionary key."},
+]
+}

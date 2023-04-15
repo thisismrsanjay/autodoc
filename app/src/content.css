@@ -1,0 +1,35 @@
+body{
+    position: relative;
+}
+
+.page-content {
+    padding: 20px;
+}
+
+.hovering-info-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Change the last value (0.7) to adjust transparency */
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.close-button1 {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.info-content {
+    padding: 10px;
+}

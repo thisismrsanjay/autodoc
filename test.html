@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hovering Info Box</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.page-content {
+    padding: 20px;
+}
+
+.hovering-info-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Change the last value (0.7) to adjust transparency */
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 300px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.info-content {
+    padding: 10px;
+}
+
+</style>
+<script>
+
+window.addEventListener('DOMContentLoaded', function () {
+    const closeButton = document.querySelector('.close-button');
+    const hoveringInfoBox = document.querySelector('.hovering-info-box');
+    let isMouseDown = false;
+    let offsetX, offsetY;
+
+    closeButton.addEventListener('click', function () {
+        hoveringInfoBox.style.display = 'none';
+    });
+
+    hoveringInfoBox.addEventListener('mousedown', function (event) {
+        isMouseDown = true;
+        offsetX = event.clientX - hoveringInfoBox.offsetLeft;
+        offsetY = event.clientY - hoveringInfoBox.offsetTop;
+    });
+
+    window.addEventListener('mousemove', function (event) {
+        if (isMouseDown) {
+            const x = event.clientX - offsetX;
+            const y = event.clientY - offsetY;
+            hoveringInfoBox.style.left = x + 'px';
+            hoveringInfoBox.style.top = y + 'px';
+        }
+    });
+
+    window.addEventListener('mouseup', function () {
+        isMouseDown = false;
+    });
+});
+
+</script>
+<body>
+    <div class="page-content">
+        <!-- Your main page content here -->
+    </div>
+    <div class="hovering-info-box">
+        <button class="close-button">&times;</button>
+        <div class="info-content">
+            <!-- Your info box content here -->
+        </div>
+    </div>
+    
+</body>
+</html>

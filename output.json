@@ -1,0 +1,33 @@
+{
+  "entire_code_use": "code",
+  "functions": [
+    {
+      "name": "fetch_raw_data_from_api",
+      "usage": "fetch_raw_data_from_api()"
+    },
+    {
+      "name": "fetch_raw_data",
+      "usage": "fetch_raw_data()"
+    },
+    {
+      "name": "fix_rawdata1and2",
+      "usage": "fix_rawdata1and2()"
+    },
+    {
+      "name": "merge_alldata",
+      "usage": "merge_alldata()"
+    },
+    {
+      "name": "fix_age",
+      "usage": "fix_age()"
+    },
+    {
+      "name": "fix_gender",
+      "usage": "fix_gender()"
+    },
+    {
+      "name": "compare_with_gospel",
+      "usage": "compare_with_gospel()"
+    }
+  ]
+}
