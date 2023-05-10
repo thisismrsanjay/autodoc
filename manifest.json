@@ -8,7 +8,7 @@
     },
     "action":{
 
-      "popup": "popup.html"
+      "default_popup": "popup.html"
     },
     "permissions":[
       

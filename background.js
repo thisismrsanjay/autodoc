@@ -1,6 +1,6 @@
 
 chrome.runtime.onInstalled.addListener(function() {
-    console.log("install")
+    
     chrome.contextMenus.create({
         "id":"test",
         "title":"Generate Documentation",
@@ -24,13 +24,13 @@ let createDoc = (info,tab)=>{
 
     function OpenaiFetchAPI() {
         console.log("Calling GPT3")
-        var url = "https://api.openai.com/v1/engines/davinci/completions";
-        var bearer = 'Bearer ' + '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';
+        var url = " https://api.openai.com/v1/chat/completions";
+        var bearer = 'Bearer ' + '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';
         fetch(url, {
             method: 'POST',
             headers: {
                 'Authorization': bearer,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 "prompt": "2+2 is ? ",

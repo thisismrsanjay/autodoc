@@ -1,3 +1,0 @@
-mapbox==0.18.0
-urllib3==1.25.9
-pandas==1.0.5

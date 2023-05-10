@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Processor</title>
+    <script>
+        async function processURL(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const response = await fetch('http://localhost:8080/process_url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({url: url})
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>URL Processor</h1>
+    <form onsubmit="processURL(event)">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Process</button>
+    </form>
+    <pre id="result"></pre>
+</body>
+</html>

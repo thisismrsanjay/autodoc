@@ -1,94 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hovering Info Box</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>OpenAI API Request</title>
 </head>
-<style>
-
-body {
-    font-family: Arial, sans-serif;
-    position: relative;
-}
-
-.page-content {
-    padding: 20px;
-}
-
-.hovering-info-box {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7); /* Change the last value (0.7) to adjust transparency */
-    color: white;
-    border-radius: 5px;
-    padding: 20px;
-    max-width: 300px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.close-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-}
-
-.info-content {
-    padding: 10px;
-}
-
-</style>
-<script>
-
-window.addEventListener('DOMContentLoaded', function () {
-    const closeButton = document.querySelector('.close-button');
-    const hoveringInfoBox = document.querySelector('.hovering-info-box');
-    let isMouseDown = false;
-    let offsetX, offsetY;
-
-    closeButton.addEventListener('click', function () {
-        hoveringInfoBox.style.display = 'none';
-    });
-
-    hoveringInfoBox.addEventListener('mousedown', function (event) {
-        isMouseDown = true;
-        offsetX = event.clientX - hoveringInfoBox.offsetLeft;
-        offsetY = event.clientY - hoveringInfoBox.offsetTop;
-    });
-
-    window.addEventListener('mousemove', function (event) {
-        if (isMouseDown) {
-            const x = event.clientX - offsetX;
-            const y = event.clientY - offsetY;
-            hoveringInfoBox.style.left = x + 'px';
-            hoveringInfoBox.style.top = y + 'px';
-        }
-    });
-
-    window.addEventListener('mouseup', function () {
-        isMouseDown = false;
-    });
-});
-
-</script>
 <body>
-    <div class="page-content">
-        <!-- Your main page content here -->
-    </div>
-    <div class="hovering-info-box">
-        <button class="close-button">&times;</button>
-        <div class="info-content">
-            <!-- Your info box content here -->
-        </div>
-    </div>
-    
+    <form id="question-form">
+        <input type="text" id="question" placeholder="Ask your question here">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="answer"></div>
+
+    <script>
+        document.getElementById('question-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const question = document.getElementById('question').value;
+            
+            fetchAnswerFromOpenAI(question).then(answer => {
+                document.getElementById('answer').innerText = answer;
+            }).catch(error => {
+                console.error('Error fetching answer:', error);
+                document.getElementById('answer').innerText = 'Error fetching answer. Please check the console for details.';
+            });
+        });
+
+        async function fetchAnswerFromOpenAI(question) {
+            const openaiApiKey = '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';  // Replace with your OpenAI API key
+            const apiUrl = 'https://api.openai.com/v1/Completion';
+            const prompt = `Answer the following question:\n\nQ: ${question}\n\nA:`;
+            const requestBody = {
+                engine :"gpt-3.5-turbo",
+                prompt: prompt,
+                max_tokens: 1000,
+                n: 1,
+                stop: null,
+                temperature: 0.5,
+
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${openaiApiKey}`,
+                },
+                body: JSON.stringify(requestBody),
+            });
+
+            if (!response.ok) {
+                throw new Error(`OpenAI API request failed with status ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            const answer = responseData.choices[0].text.trim();
+            return answer;
+        }
+    </script>
 </body>
 </html>
